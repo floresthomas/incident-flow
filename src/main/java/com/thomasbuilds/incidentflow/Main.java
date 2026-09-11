@@ -1,22 +1,28 @@
 package com.thomasbuilds.incidentflow;
 
 public class Main {
-    public static double calculateAverageLatency(int[] latencies){
-        int total = 0;
-        for(int latency : latencies){
-            total += latency;
-        }
-
-        double division = (double) total / latencies.length;
-
-        return division;
-    }
-
     public static void main(String[] args) {
-        int[] latencies = {100, 200, 301};
+        Incident incident1 = new Incident(1, "red", "open", 25);
+        Incident incident2 = new Incident(2, "red", "closed", 5);
+        Incident incident3 = new Incident(3, "access", "open", 21);
+        Incident incident4 = new Incident(4, "access", "closed", 10);
 
-        double result = calculateAverageLatency(latencies);
+        Incident[] incidents = {incident1, incident2, incident3, incident4};
 
-        System.out.println(result);
+        String slaStatus;
+        IncidentSummary incSummary = new IncidentSummary();
+
+        for(Incident inc : incidents){
+            incSummary.addIncident(inc);
+            if(inc.isSlaAtRisk()){
+                slaStatus = "SLA en riesgo";
+            } else {
+                slaStatus = "SLA controlado";
+            }
+            System.out.println("Incident " + inc.getId() + " | " + inc.getCategory() + " | " + inc.getState() + " | " + inc.getDuration() + " minutes" + " | " + slaStatus);
+        }
+        System.out.println("Incidents opened: " + incSummary.getIncidentsOpen() + "\n" +
+                "Incidents closed: " + incSummary.getIncidentsClosed() + "\n" +
+                "Duration of opened incidents: " + incSummary.getDurationIncident() + " minutes");
     }
 }

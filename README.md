@@ -21,3 +21,15 @@ Estoy aprendiendo:
 
 ## Próximo objetivo
 - Modelar un incidente como objeto Java y procesar varios incidentes sin repetir variables.
+
+## Día 2
+
+Estoy aprendiendo:
+- Clases
+- Objetos
+- Constructores
+- Encapsulación
+- Métodos de instancia
+
+## Próximo objetivo
+- Validar que un incidente no pueda crearse con datos inválidos.
