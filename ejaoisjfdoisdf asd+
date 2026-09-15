@@ -1,0 +1,40 @@
+[1mdiff --git a/src/main/java/com/thomasbuilds/incidentflow/Main.java b/src/main/java/com/thomasbuilds/incidentflow/Main.java[m
+[1mindex 9f6cbc1..53e7c36 100644[m
+[1m--- a/src/main/java/com/thomasbuilds/incidentflow/Main.java[m
+[1m+++ b/src/main/java/com/thomasbuilds/incidentflow/Main.java[m
+[36m@@ -1,5 +1,7 @@[m
+ package com.thomasbuilds.incidentflow;[m
+ [m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m
+ public class Main {[m
+     public static void main(String[] args) {[m
+         Incident incident1 = new Incident(1, "red", IncidentState.OPEN, 25);[m
+[36m@@ -7,21 +9,14 @@[m [mpublic class Main {[m
+         Incident incident3 = new Incident(3, "access", IncidentState.OPEN, 21);[m
+         Incident incident4 = new Incident(4, "access", IncidentState.CLOSED, 10);[m
+ [m
+[31m-        incident1.close();[m
+[31m-[m
+[31m-        try {[m
+[31m-            incident1.close();[m
+[31m-        } catch (IllegalStateException error) {[m
+[31m-            System.out.println([m
+[31m-                    "Could not close incident: " + error.getMessage()[m
+[31m-            );[m
+[31m-        }[m
+[31m-[m
+[31m-        incident1.reopen();[m
+[32m+[m[32m        IncidentRepository repository = new IncidentRepository();[m
+ [m
+[31m-        System.out.println(incident1.getState());[m
+[32m+[m[32m        repository.save(incident1);[m
+[32m+[m[32m        repository.save(incident2);[m
+[32m+[m[32m        repository.save(incident3);[m
+[32m+[m[32m        repository.save(incident4);[m
+ [m
+[31m-        Incident[] incidents = {incident1, incident2, incident3, incident4};[m
+[32m+[m[32m        List<Incident> incidents = repository.findAll();[m
+ [m
+         String slaStatus;[m
+         IncidentSummary incSummary = new IncidentSummary();[m

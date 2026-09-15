@@ -1,5 +1,7 @@
 package com.thomasbuilds.incidentflow;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         Incident incident1 = new Incident(1, "red", IncidentState.OPEN, 25);
@@ -7,21 +9,14 @@ public class Main {
         Incident incident3 = new Incident(3, "access", IncidentState.OPEN, 21);
         Incident incident4 = new Incident(4, "access", IncidentState.CLOSED, 10);
 
-        incident1.close();
+        IncidentRepository repository = new IncidentRepository();
 
-        try {
-            incident1.close();
-        } catch (IllegalStateException error) {
-            System.out.println(
-                    "Could not close incident: " + error.getMessage()
-            );
-        }
+        repository.save(incident1);
+        repository.save(incident2);
+        repository.save(incident3);
+        repository.save(incident4);
 
-        incident1.reopen();
-
-        System.out.println(incident1.getState());
-
-        Incident[] incidents = {incident1, incident2, incident3, incident4};
+        List<Incident> incidents = repository.findAll();
 
         String slaStatus;
         IncidentSummary incSummary = new IncidentSummary();
