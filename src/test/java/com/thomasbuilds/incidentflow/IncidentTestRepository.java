@@ -78,4 +78,27 @@ public class IncidentTestRepository {
 
         assertTrue(result.isEmpty());
     }
+    @Test
+    public void save_givenIncident_shouldDifferentIncidentWithTheSameIdThrowAnIllegalArgumentException(){
+        IncidentRepository repository = new IncidentRepository();
+        Incident incident = new Incident(
+                1,
+                "red",
+                IncidentState.OPEN,
+                25
+        );
+        repository.save(incident);
+
+        Incident incident1 = new Incident(
+                1,
+                "access",
+                IncidentState.OPEN,
+                25
+        );
+
+       Optional<Incident> result = repository.findById(incident.getId());
+
+        assertThrows(IllegalArgumentException.class, () -> repository.save(incident1));
+        assertSame(incident, result.get());
+    }
 }

@@ -1,28 +1,21 @@
 package com.thomasbuilds.incidentflow;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class IncidentRepository {
-    private final List<Incident> incidents = new ArrayList<>();
+    private final Map<Integer, Incident> incidents = new HashMap<>();
 
     public Incident save(Incident incident){
-        incidents.add(incident);
+        if(incidents.containsKey(incident.getId())) throw new IllegalArgumentException("Incident with ID 1 already exists");
+        incidents.put(incident.getId(), incident);
         return incident;
     }
 
     public List<Incident> findAll(){
-        return new ArrayList<>(incidents);
+        return new ArrayList<>(incidents.values());
     }
 
     public Optional<Incident> findById(int id) {
-        for (Incident incident : incidents) {
-            if (incident.getId() == id) {
-                return Optional.of(incident);
-            }
-        }
-
-        return Optional.empty();
+        return Optional.ofNullable(incidents.get(id));
     }
 }

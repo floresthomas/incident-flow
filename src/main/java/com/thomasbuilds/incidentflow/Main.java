@@ -10,6 +10,7 @@ public class Main {
         Incident incident4 = new Incident(4, "access", IncidentState.CLOSED, 10);
 
         IncidentRepository repository = new IncidentRepository();
+        IncidentService service = new IncidentService(repository);
 
         repository.save(incident1);
         repository.save(incident2);
