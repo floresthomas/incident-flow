@@ -9,15 +9,15 @@ public class Main {
         Incident incident3 = new Incident(3, "access", IncidentState.OPEN, 21);
         Incident incident4 = new Incident(4, "access", IncidentState.CLOSED, 10);
 
-        IncidentRepository repository = new IncidentRepository();
+        IncidentRepository repository = new InMemoryIncidentRepository();
         IncidentService service = new IncidentService(repository);
 
-        repository.save(incident1);
-        repository.save(incident2);
-        repository.save(incident3);
-        repository.save(incident4);
+        service.saveIncident(incident1);
+        service.saveIncident(incident2);
+        service.saveIncident(incident3);
+        service.saveIncident(incident4);
 
-        List<Incident> incidents = repository.findAll();
+        List<Incident> incidents = service.getAllIncidents();
 
         String slaStatus;
         IncidentSummary incSummary = new IncidentSummary();

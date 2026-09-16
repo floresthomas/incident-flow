@@ -14,7 +14,7 @@ public class IncidentTestRepository {
                 IncidentState.OPEN,
                 25
         );
-        IncidentRepository repository = new IncidentRepository();
+        InMemoryIncidentRepository repository = new InMemoryIncidentRepository();
 
         repository.save(incident);
         List<Incident> result = repository.findAll();
@@ -24,7 +24,7 @@ public class IncidentTestRepository {
     }
     @Test
     public void findAll_givenCreatedRepository_shouldReturnEmptyList(){
-        IncidentRepository repository = new IncidentRepository();
+        InMemoryIncidentRepository repository = new InMemoryIncidentRepository();
         List<Incident> result = repository.findAll();
 
         assertEquals(0, result.size());
@@ -38,7 +38,7 @@ public class IncidentTestRepository {
                 IncidentState.OPEN,
                 25
         );
-        IncidentRepository repository = new IncidentRepository();
+        InMemoryIncidentRepository repository = new InMemoryIncidentRepository();
         repository.save(incident);
         List<Incident> result = repository.findAll();
 
@@ -50,7 +50,7 @@ public class IncidentTestRepository {
     }
     @Test
     public void findById_givenExistingId_shouldReturnSameIncident(){
-        IncidentRepository repository = new IncidentRepository();
+        InMemoryIncidentRepository repository = new InMemoryIncidentRepository();
         Incident incident = new Incident(
                 1,
                 "red",
@@ -65,7 +65,7 @@ public class IncidentTestRepository {
     }
     @Test
     public void findById_givenDifferentId_shouldReturnNotFoundId(){
-        IncidentRepository repository = new IncidentRepository();
+        InMemoryIncidentRepository repository = new InMemoryIncidentRepository();
         Incident incident = new Incident(
                 1,
                 "red",
@@ -80,7 +80,7 @@ public class IncidentTestRepository {
     }
     @Test
     public void save_givenIncident_shouldDifferentIncidentWithTheSameIdThrowAnIllegalArgumentException(){
-        IncidentRepository repository = new IncidentRepository();
+        InMemoryIncidentRepository repository = new InMemoryIncidentRepository();
         Incident incident = new Incident(
                 1,
                 "red",

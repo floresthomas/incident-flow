@@ -8,7 +8,7 @@ public class IncidentServiceTest {
 
     @Test
     public void closeIncident_givenExistingOpenIncident_shouldCloseAndReturnIt() {
-        IncidentRepository repository = new IncidentRepository();
+        InMemoryIncidentRepository repository = new InMemoryIncidentRepository();
 
         Incident incident = new Incident(
                 1,
@@ -29,7 +29,7 @@ public class IncidentServiceTest {
 
     @Test
     public void closeIncident_givenMissingId_shouldThrowIncidentNotFoundException() {
-        IncidentRepository repository = new IncidentRepository();
+        InMemoryIncidentRepository repository = new InMemoryIncidentRepository();
         IncidentService service = new IncidentService(repository);
 
         IncidentNotFoundException error = assertThrows(
@@ -38,5 +38,25 @@ public class IncidentServiceTest {
         );
 
         assertEquals("Incident with ID 99 not found", error.getMessage());
+    }
+
+    @Test
+    public void reopenIncident_givenId_shouldReturnOpen(){
+        IncidentRepository repository = new InMemoryIncidentRepository();;
+
+        Incident incident = new Incident(
+                1,
+                "red",
+                IncidentState.CLOSED,
+                25
+        );
+
+        repository.save(incident);
+
+        IncidentService service = new IncidentService(repository);
+
+        Incident result = service.reopenIncident(incident.getId());
+        assertSame(incident, result);
+        assertEquals(IncidentState.OPEN, result.getState());
     }
 }
