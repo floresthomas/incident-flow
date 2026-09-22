@@ -4,35 +4,42 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Incident incident1 = new Incident(1, "red", IncidentState.OPEN, 25);
-        Incident incident2 = new Incident(2, "red", IncidentState.CLOSED, 5);
-        Incident incident3 = new Incident(3, "access", IncidentState.OPEN, 21);
-        Incident incident4 = new Incident(4, "access", IncidentState.CLOSED, 10);
+        String dbUrl = System.getenv("DB_URL");
+        String dbUser = System.getenv("DB_USER");
+        String dbPassword = System.getenv("DB_PASSWORD");
 
-        IncidentRepository repository = new InMemoryIncidentRepository();
+        IncidentRepository repository =
+                new PostgresIncidentRepository(dbUrl, dbUser, dbPassword);
+
         IncidentService service = new IncidentService(repository);
-
-        service.saveIncident(incident1);
-        service.saveIncident(incident2);
-        service.saveIncident(incident3);
-        service.saveIncident(incident4);
-
         List<Incident> incidents = service.getAllIncidents();
 
-        String slaStatus;
-        IncidentSummary incSummary = new IncidentSummary();
+        IncidentSummary summary = new IncidentSummary();
 
-        for(Incident inc : incidents){
-            incSummary.addIncident(inc);
-            if(inc.isSlaAtRisk()){
+        for (Incident incident : incidents) {
+            summary.addIncident(incident);
+
+            String slaStatus;
+            if (incident.isSlaAtRisk()) {
                 slaStatus = "SLA en riesgo";
             } else {
                 slaStatus = "SLA controlado";
             }
-            System.out.println("Incident " + inc.getId() + " | " + inc.getCategory() + " | " + inc.getState() + " | " + inc.getDuration() + " minutes" + " | " + slaStatus);
+
+            System.out.println(
+                    "Incident " + incident.getId()
+                            + " | " + incident.getCategory()
+                            + " | " + incident.getState()
+                            + " | " + incident.getDuration() + " minutes"
+                            + " | " + slaStatus
+            );
         }
-        System.out.println("Incidents opened: " + incSummary.getIncidentsOpen() + "\n" +
-                "Incidents closed: " + incSummary.getIncidentsClosed() + "\n" +
-                "Duration of opened incidents: " + incSummary.getDurationIncident() + " minutes");
+
+        System.out.println(
+                "Incidents opened: " + summary.getIncidentsOpen() + "\n"
+                        + "Incidents closed: " + summary.getIncidentsClosed() + "\n"
+                        + "Duration of opened incidents: "
+                        + summary.getDurationIncident() + " minutes"
+        );
     }
 }

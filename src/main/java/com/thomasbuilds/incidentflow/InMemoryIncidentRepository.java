@@ -22,4 +22,14 @@ public class InMemoryIncidentRepository implements IncidentRepository{
     public Optional<Incident> findById(int id) {
         return Optional.ofNullable(incidents.get(id));
     }
+
+    @Override
+    public Incident update(Incident incident) {
+        if (!incidents.containsKey(incident.getId())) {
+            throw new IncidentNotFoundException(incident.getId());
+        }
+
+        incidents.put(incident.getId(), incident);
+        return incident;
+    }
 }

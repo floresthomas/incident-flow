@@ -11,18 +11,14 @@ public class IncidentService {
 
     public Incident closeIncident(int id) {
         Incident incident = findIncidentOrThrow(id);
-
         incident.close();
-
-        return incident;
+        return repository.update(incident);
     }
 
-    public Incident reopenIncident(int id){
+    public Incident reopenIncident(int id) {
         Incident incident = findIncidentOrThrow(id);
-
         incident.reopen();
-
-        return incident;
+        return repository.update(incident);
     }
 
     public Incident saveIncident(Incident incident){
