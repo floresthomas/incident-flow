@@ -1,7 +1,10 @@
 package com.thomasbuilds.incidentflow;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class IncidentService {
     private final IncidentRepository repository;
 
