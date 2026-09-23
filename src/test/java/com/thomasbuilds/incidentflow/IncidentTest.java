@@ -1,5 +1,8 @@
 package com.thomasbuilds.incidentflow;
 
+import com.thomasbuilds.incidentflow.domain.Incident;
+import com.thomasbuilds.incidentflow.domain.IncidentState;
+import com.thomasbuilds.incidentflow.domain.IncidentSummary;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

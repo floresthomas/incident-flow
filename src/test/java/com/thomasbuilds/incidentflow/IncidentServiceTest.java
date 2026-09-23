@@ -1,5 +1,11 @@
 package com.thomasbuilds.incidentflow;
 
+import com.thomasbuilds.incidentflow.application.IncidentNotFoundException;
+import com.thomasbuilds.incidentflow.application.IncidentRepository;
+import com.thomasbuilds.incidentflow.application.IncidentService;
+import com.thomasbuilds.incidentflow.domain.Incident;
+import com.thomasbuilds.incidentflow.domain.IncidentState;
+import com.thomasbuilds.incidentflow.infrastructure.InMemoryIncidentRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

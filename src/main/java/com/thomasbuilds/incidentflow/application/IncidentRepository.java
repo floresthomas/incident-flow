@@ -1,4 +1,6 @@
-package com.thomasbuilds.incidentflow;
+package com.thomasbuilds.incidentflow.application;
+
+import com.thomasbuilds.incidentflow.domain.Incident;
 
 import java.util.List;
 import java.util.Optional;

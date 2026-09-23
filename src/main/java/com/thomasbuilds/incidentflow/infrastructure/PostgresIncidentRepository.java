@@ -1,4 +1,9 @@
-package com.thomasbuilds.incidentflow;
+package com.thomasbuilds.incidentflow.infrastructure;
+
+import com.thomasbuilds.incidentflow.application.IncidentNotFoundException;
+import com.thomasbuilds.incidentflow.application.IncidentRepository;
+import com.thomasbuilds.incidentflow.domain.Incident;
+import com.thomasbuilds.incidentflow.domain.IncidentState;
 
 import java.sql.*;
 import java.util.ArrayList;

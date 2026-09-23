@@ -1,5 +1,7 @@
-package com.thomasbuilds.incidentflow;
+package com.thomasbuilds.incidentflow.infrastructure;
 
+import com.thomasbuilds.incidentflow.infrastructure.PostgresIncidentRepository;
+import com.thomasbuilds.incidentflow.application.IncidentRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

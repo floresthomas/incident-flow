@@ -1,5 +1,8 @@
-package com.thomasbuilds.incidentflow;
+package com.thomasbuilds.incidentflow.application;
 
+import com.thomasbuilds.incidentflow.application.IncidentNotFoundException;
+import com.thomasbuilds.incidentflow.application.IncidentRepository;
+import com.thomasbuilds.incidentflow.domain.Incident;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

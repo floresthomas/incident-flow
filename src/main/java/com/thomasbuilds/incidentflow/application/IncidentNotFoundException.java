@@ -1,4 +1,4 @@
-package com.thomasbuilds.incidentflow;
+package com.thomasbuilds.incidentflow.application;
 
 public class IncidentNotFoundException extends RuntimeException {
 

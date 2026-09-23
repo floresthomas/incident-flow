@@ -1,8 +1,12 @@
-package com.thomasbuilds.incidentflow;
+package com.thomasbuilds.incidentflow.infrastructure;
+
+import com.thomasbuilds.incidentflow.application.IncidentNotFoundException;
+import com.thomasbuilds.incidentflow.application.IncidentRepository;
+import com.thomasbuilds.incidentflow.domain.Incident;
 
 import java.util.*;
 
-public class InMemoryIncidentRepository implements IncidentRepository{
+public class InMemoryIncidentRepository implements IncidentRepository {
     private final Map<Integer, Incident> incidents = new HashMap<>();
 
     @Override

@@ -1,4 +1,4 @@
-package com.thomasbuilds.incidentflow;
+package com.thomasbuilds.incidentflow.domain;
 
 public class IncidentSummary {
     private int incidentsOpen = 0;
