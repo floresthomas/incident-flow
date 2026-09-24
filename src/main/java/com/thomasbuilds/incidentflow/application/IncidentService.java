@@ -35,7 +35,7 @@ public class IncidentService {
         return repository.findAll();
     }
 
-    private Incident findIncidentOrThrow(int id) {
+    public Incident findIncidentOrThrow(int id) {
         return repository.findById(id)
                 .orElseThrow(() -> new IncidentNotFoundException(id));
     }
